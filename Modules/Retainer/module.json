@@ -1,0 +1,13 @@
+{
+    "name": "Retainer",
+    "alias": "Retainer",
+    "description": "",
+    "keywords": [],
+    "priority": 200,
+    "version":3.3,
+    "providers": [
+        "Modules\\Retainer\\Providers\\RetainerServiceProvider",
+        "Modules\\Retainer\\Providers\\ViewComposer"
+    ],
+    "files": []
+}

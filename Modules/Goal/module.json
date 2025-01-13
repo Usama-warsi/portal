@@ -1,0 +1,13 @@
+{
+    "name": "Goal",
+    "alias": "Financial Goal",
+    "description": "Depending on Accounting",
+    "keywords": [],
+    "priority": 20.1,
+    "version":3.0,
+    "providers": [
+        "Modules\\Goal\\Providers\\GoalServiceProvider"
+    ],
+    "files": [],
+    "parent_module": ["Account"]
+}

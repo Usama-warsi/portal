@@ -1,0 +1,26 @@
+{
+    "name": "workdo/googlecaptcha",
+    "description": "",
+    "authors": [
+        {
+            "name": "WorkDo",
+            "email": "support@workdo.io"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\GoogleCaptcha\\": ""
+        }
+    },
+    "require": {
+        "anhskohbo/no-captcha": "^3.5"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "SalesAgent",
+    "alias": "Sales Agent",
+    "description": "",
+    "keywords": [],
+    "priority": 1110,
+    "version":3.3,
+    "providers": [
+        "Modules\\SalesAgent\\Providers\\SalesAgentServiceProvider",
+        "Modules\\SalesAgent\\Providers\\EventServiceProvider",
+        "Modules\\SalesAgent\\Providers\\ViewComposer"
+    ],
+    "files": []
+}

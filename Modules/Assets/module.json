@@ -1,0 +1,12 @@
+{
+    "name": "Assets",
+    "alias": "Assets",
+    "description": "",
+    "keywords": [],
+    "priority": 510,
+    "version":3.3,
+    "providers": [
+        "Modules\\Assets\\Providers\\AssetsServiceProvider"
+    ],
+    "files": []
+}

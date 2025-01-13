@@ -1,0 +1,14 @@
+{
+    "name": "GoogleCaptcha",
+    "alias": "Google Captcha",
+    "description": "",
+    "keywords": [],
+    "priority": 880,
+    "version":3.1,
+    "providers": [
+        "Modules\\GoogleCaptcha\\Providers\\GoogleCaptchaServiceProvider",
+        "Modules\\GoogleCaptcha\\Providers\\ViewComposer"
+    ],
+    "files": [],
+    "display": true
+}

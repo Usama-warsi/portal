@@ -1,0 +1,18 @@
+{
+    "name": "Toyyibpay",
+    "alias": "toyyibPay",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "version":3.1,
+    "providers": [
+        "Modules\\Toyyibpay\\Providers\\ToyyibpayServiceProvider",
+        "Modules\\Toyyibpay\\Providers\\ViewComposer",
+        "Modules\\Toyyibpay\\Providers\\InvoicePayment",
+        "Modules\\Toyyibpay\\Providers\\RetainerPayment",
+        "Modules\\Toyyibpay\\Providers\\CoursePayment",
+        "Modules\\Toyyibpay\\Providers\\HotelRoomBookingPayment",
+        "Modules\\Toyyibpay\\Providers\\EventServiceProvider"
+    ],
+    "files": []
+}

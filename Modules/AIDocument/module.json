@@ -1,0 +1,12 @@
+{
+    "name": "AIDocument",
+    "alias": "AI Document",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "version":3.2,
+    "providers": [
+        "Modules\\AIDocument\\Providers\\AIDocumentServiceProvider"
+    ],
+    "files": []
+}

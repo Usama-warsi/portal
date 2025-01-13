@@ -1,0 +1,32 @@
+<?php
+
+namespace Modules\Rotas\Entities;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class Designation extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'branch_id',
+        'department_id',
+        'name',
+        'workspace',
+        'created_by'
+    ];
+
+    public function branch(){
+        return $this->hasOne(Branch::class,'id','branch_id');
+    }
+    public function department(){
+        return $this->hasOne(Department::class,'id','department_id');
+    }
+
+
+    protected static function newFactory()
+    {
+        return \Modules\Rotas\Database\factories\DesignationFactory::new();
+    }
+}

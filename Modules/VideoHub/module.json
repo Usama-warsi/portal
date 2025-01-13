@@ -1,0 +1,13 @@
+{
+    "name": "VideoHub",
+    "alias": "Video Hub",
+    "description": "",
+    "keywords": [],
+    "priority": 630,
+    "version":3.2,
+    "providers": [
+        "Modules\\VideoHub\\Providers\\VideoHubServiceProvider",
+        "Modules\\VideoHub\\Providers\\AddHookServiceProvider"
+    ],
+    "files": []
+}

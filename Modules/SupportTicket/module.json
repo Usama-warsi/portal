@@ -1,0 +1,13 @@
+{
+    "name": "SupportTicket",
+    "alias": "Support Ticket",
+    "description": "",
+    "keywords": [],
+    "priority": 130,
+    "version":3.4,
+    "providers": [
+        "Modules\\SupportTicket\\Providers\\SupportTicketServiceProvider"
+    ],
+    "files": [],
+    "child_module": ["Zendesk"]
+}

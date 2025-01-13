@@ -1,0 +1,14 @@
+{
+    "name": "Commission",
+    "alias": "Commission",
+    "description": "",
+    "keywords": [],
+    "priority": 640,
+    "version":3.1,
+    "providers": [
+        "Modules\\Commission\\Providers\\CommissionServiceProvider",
+        "Modules\\Commission\\Providers\\ViewComposer",
+        "Modules\\Commission\\Providers\\EventServiceProvider"
+    ],
+    "files": []
+}

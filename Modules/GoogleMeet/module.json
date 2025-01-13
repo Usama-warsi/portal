@@ -1,0 +1,13 @@
+{
+    "name": "GoogleMeet",
+    "alias": "Google Meet",
+    "description": "",
+    "keywords": [],
+    "priority": 176,
+    "version":3.1,
+    "providers": [
+        "Modules\\GoogleMeet\\Providers\\GoogleMeetServiceProvider",
+        "Modules\\GoogleMeet\\Providers\\EventServiceProvider"
+    ],
+    "files": []
+}

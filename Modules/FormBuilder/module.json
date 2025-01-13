@@ -1,0 +1,13 @@
+{
+    "name": "FormBuilder",
+    "alias": "Form Builder",
+    "description": "Depending on CRM",
+    "keywords": [],
+    "priority": 280,
+    "version":3.1,
+    "providers": [
+        "Modules\\FormBuilder\\Providers\\FormBuilderServiceProvider"
+    ],
+    "files": [],
+    "parent_module": ["Lead"]
+}

@@ -1,0 +1,14 @@
+{
+    "name": "Spreadsheet",
+    "alias": "Spreadsheet",
+    "description": "",
+    "keywords": [],
+    "priority": 550,
+    "version":3.3,
+    "providers": [
+        "Modules\\Spreadsheet\\Providers\\SpreadsheetServiceProvider",
+        "Modules\\Spreadsheet\\Providers\\ViewComposer"
+
+    ],
+    "files": []
+}

@@ -1,0 +1,14 @@
+{
+    "name": "Training",
+    "alias": "Training",
+    "description": "Depending on HRM",
+    "keywords": [],
+    "priority": 250,
+    "version":3.0,
+    "providers": [
+        "Modules\\Training\\Providers\\TrainingServiceProvider",
+        "Modules\\Training\\Providers\\EventServiceProvider"
+    ],
+    "files": [],
+    "parent_module": ["Hrm"]
+}

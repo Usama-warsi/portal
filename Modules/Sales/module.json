@@ -1,0 +1,16 @@
+{
+    "name": "Sales",
+    "alias": "Sales",
+    "description": "",
+    "keywords": [],
+    "priority": 60,
+    "version": 3.4,
+    "providers": [
+        "Modules\\Sales\\Providers\\SalesServiceProvider",
+        "Modules\\Sales\\Providers\\EventServiceProvider",
+        "Modules\\Sales\\Providers\\RouteServiceProvider",
+        "Modules\\Sales\\Providers\\ViewComposer"
+
+    ],
+    "files": []
+}

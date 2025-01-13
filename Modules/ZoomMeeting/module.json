@@ -1,0 +1,12 @@
+{
+    "name": "ZoomMeeting",
+    "alias": "Zoom Meeting",
+    "description": "",
+    "keywords": [],
+    "priority": 900,
+    "version":3.2,
+    "providers": [
+        "Modules\\ZoomMeeting\\Providers\\ZoomMeetingServiceProvider"
+    ],
+    "files": []
+}
