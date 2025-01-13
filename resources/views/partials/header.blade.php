@@ -15,9 +15,9 @@
 
                 <li class="dropdown dash-h-item drp-company">
                     <a class="dash-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"
-                        role="button" aria-haspopup="false"aria-expanded="false">
+                        role="button" aria-haspopup="false" aria-expanded="false">
                         @if (!empty(Auth::user()->avatar))
-                        {{-- @dd(1,check_file(Auth::user()->avatar),get_file(Auth::user()->avatar),Auth::user()) --}}
+                            {{-- @dd(1,check_file(Auth::user()->avatar),get_file(Auth::user()->avatar),Auth::user()) --}}
                             <span class="theme-avtar">
                                 <img alt="#"
                                     src="{{ check_file(Auth::user()->avatar) ? get_file(Auth::user()->avatar) : '' }}"
@@ -31,10 +31,10 @@
                     </a>
                     <div class="dropdown-menu dash-h-dropdown">
                         @permission('user profile manage')
-                            <a href="{{ route('profile') }}" class="dropdown-item">
-                                <i class="ti ti-user"></i>
-                                <span>{{ __('Profile') }}</span>
-                            </a>
+                        <a href="{{ route('profile') }}" class="dropdown-item">
+                            <i class="ti ti-user"></i>
+                            <span>{{ __('Profile') }}</span>
+                        </a>
                         @endpermission
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"
@@ -53,11 +53,11 @@
         <div class="ms-auto">
             <ul class="list-unstyled">
                 @impersonating($guard = null)
-                    <li class="dropdown dash-h-item drp-company">
-                        <a class="btn btn-danger btn-sm me-3" href="{{ route('exit.company') }}"><i class="ti ti-ban"></i>
-                            {{ __('Exit Company Login') }}
-                        </a>
-                    </li>
+                <li class="dropdown dash-h-item drp-company">
+                    <a class="btn btn-danger btn-sm me-3" href="{{ route('exit.company') }}"><i class="ti ti-ban"></i>
+                        {{ __('Exit Company Login') }}
+                    </a>
+                </li>
                 @endImpersonating
 
                 @permission('user chat manage')
@@ -77,6 +77,8 @@
                 </li>
                 @endpermission
 
+
+
                 <script>
                     document.addEventListener('DOMContentLoaded', () => {
                         let chatifyWindow = null; // Track the Chatify window/tab globally
@@ -93,13 +95,13 @@
                         function showNotification(title, body, url) {
                             if (Notification.permission === 'granted') {
                                 // Play a notification sound
-                                const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2575/2575-preview.mp3'); // Replace with your sound file path
+                                const audio = new Audio('{{ env('NOTI_TUNE') }}');
                                 audio.play();
 
                                 // Create the notification
                                 const notification = new Notification(title, {
                                     body: body,
-                                    icon: 'http://localhost/portal/uploads/logo/logo_dark_1735684065.png?1736720441', // Optional: Replace with your notification icon
+                                    icon: '{{ get_file(sidebar_logo()) }}{{ '?' . time() }}',
                                 });
 
                                 // Redirect to the Chatify window or open a new one when clicked
@@ -125,7 +127,7 @@
                                 showNotification(
                                     'New Message',
                                     `You have ${counter} new message(s)!`,
-                                    'http://localhost/portal/chatify' // Replace with your desired URL
+                                    '{{ url('/chatify') }}'
                                 );
                             }
                         });
@@ -139,6 +141,7 @@
                         }
                     });
                 </script>
+
                 <!-- @permission('user chat manage')
                     @php
                         $unseenCounter = App\Models\ChMessage::where('to_id', Auth::user()->id)
@@ -156,100 +159,100 @@
                 @endpermission -->
 
                 @permission('workspace create')
-                    @if (PlanCheck('Workspace', Auth::user()->id) == true)
-                        <li class="dash-h-item">
-                            <a href="#!" class="dash-head-link dropdown-toggle arrow-none me-0 cust-btn"
-                                data-url="{{ route('workspace.create') }}" data-ajax-popup="true"
-                                data-title="{{ __('Create New Workspace') }}">
-                                <i class="ti ti-circle-plus"></i>
-                                <span class="hide-mob">{{ __('Create Workspace') }}</span>
-                            </a>
-                        </li>
-                    @endif
+                @if (PlanCheck('Workspace', Auth::user()->id) == true)
+                    <li class="dash-h-item">
+                        <a href="#!" class="dash-head-link dropdown-toggle arrow-none me-0 cust-btn"
+                            data-url="{{ route('workspace.create') }}" data-ajax-popup="true"
+                            data-title="{{ __('Create New Workspace') }}">
+                            <i class="ti ti-circle-plus"></i>
+                            <span class="hide-mob">{{ __('Create Workspace') }}</span>
+                        </a>
+                    </li>
+                @endif
                 @endpermission
                 @permission('workspace manage')
-                    <li class="dropdown dash-h-item drp-language">
-                        <a class="dash-head-link dropdown-toggle arrow-none me-0 cust-btn" data-bs-toggle="dropdown"
-                            href="#" role="button" aria-haspopup="false" aria-expanded="false"
-                            data-bs-placement="bottom" data-bs-original-title="Select your bussiness">
-                            <i class="ti ti-apps"></i>
-                            <span class="hide-mob">{{ Auth::user()->ActiveWorkspaceName() }}</span>
-                            <i class="ti ti-chevron-down drp-arrow nocolor"></i>
-                        </a>
-                        <div class="dropdown-menu dash-h-dropdown dropdown-menu-end" style="">
-                            @foreach (getWorkspace() as $workspace)
-                                @if ($workspace->id == getActiveWorkSpace())
-                                    <div class="d-flex justify-content-between bd-highlight">
-                                        <a href=" # " class="dropdown-item ">
-                                            <i class="ti ti-checks text-primary"></i>
-                                            <span>{{ $workspace->name }}</span>
-                                            @if ($workspace->created_by == Auth::user()->id)
-                                                <span class="badge bg-dark">
-                                                    {{ Auth::user()->roles->first()->name }}</span>
-                                            @else
-                                                <span class="badge bg-dark"> {{ __('Shared') }}</span>
-                                            @endif
-                                        </a>
-                                        @if ($workspace->created_by == Auth::user()->id)
-                                            @permission('workspace edit')
-                                                <div class="action-btn mt-2">
-                                                    <a data-url="{{ route('workspace.edit', $workspace->id) }}"
-                                                        class="mx-3 btn" data-ajax-popup="true"
-                                                        data-title="{{ __('Edit Workspace Name') }}" data-toggle="tooltip"
-                                                        data-original-title="{{ __('Edit') }}">
-                                                        <i class="ti ti-pencil text-success"></i>
+                <li class="dropdown dash-h-item drp-language">
+                    <a class="dash-head-link dropdown-toggle arrow-none me-0 cust-btn" data-bs-toggle="dropdown"
+                        href="#" role="button" aria-haspopup="false" aria-expanded="false" data-bs-placement="bottom"
+                        data-bs-original-title="Select your bussiness">
+                        <i class="ti ti-apps"></i>
+                        <span class="hide-mob">{{ Auth::user()->ActiveWorkspaceName() }}</span>
+                        <i class="ti ti-chevron-down drp-arrow nocolor"></i>
+                    </a>
+                    <div class="dropdown-menu dash-h-dropdown dropdown-menu-end" style="">
+                        @foreach (getWorkspace() as $workspace)
+                                            @if ($workspace->id == getActiveWorkSpace())
+                                                <div class="d-flex justify-content-between bd-highlight">
+                                                    <a href=" # " class="dropdown-item ">
+                                                        <i class="ti ti-checks text-primary"></i>
+                                                        <span>{{ $workspace->name }}</span>
+                                                        @if ($workspace->created_by == Auth::user()->id)
+                                                            <span class="badge bg-dark">
+                                                                {{ Auth::user()->roles->first()->name }}</span>
+                                                        @else
+                                                            <span class="badge bg-dark"> {{ __('Shared') }}</span>
+                                                        @endif
                                                     </a>
+                                                    @if ($workspace->created_by == Auth::user()->id)
+                                                        @permission('workspace edit')
+                                                        <div class="action-btn mt-2">
+                                                            <a data-url="{{ route('workspace.edit', $workspace->id) }}" class="mx-3 btn"
+                                                                data-ajax-popup="true" data-title="{{ __('Edit Workspace Name') }}"
+                                                                data-toggle="tooltip" data-original-title="{{ __('Edit') }}">
+                                                                <i class="ti ti-pencil text-success"></i>
+                                                            </a>
+                                                        </div>
+                                                        @endpermission
+                                                    @endif
                                                 </div>
-                                            @endpermission
-                                        @endif
-                                    </div>
-                                @else
-                                @php
-                                    $route = ($workspace->is_disable == 1) ?  route('workspace.change', $workspace->id) : '#';
-                                @endphp
-                                    <div class="d-flex justify-content-between bd-highlight">
+                                            @else
+                                                                @php
+                                                                    $route = ($workspace->is_disable == 1) ? route('workspace.change', $workspace->id) : '#';
+                                                                @endphp
+                                                                <div class="d-flex justify-content-between bd-highlight">
 
-                                    <a href="{{ $route }}" class="dropdown-item">
-                                        <span>{{ $workspace->name }}</span>
-                                        @if ($workspace->created_by == Auth::user()->id)
-                                            <span class="badge bg-dark"> {{ Auth::user()->roles->first()->name }}</span>
-                                        @else
-                                            <span class="badge bg-dark"> {{ __('Shared') }}</span>
-                                        @endif
-                                    </a>
-                                    @if ($workspace->is_disable == 0)
-                                            <div class="action-btn mt-2">
-                                                <i class="ti ti-lock"></i>
-                                            </div>
-                                        @endif
-                                    </div>
-                                @endif
-                            @endforeach
-                            @if (getWorkspace()->count() > 1)
-                                @permission('workspace delete')
-                                    <hr class="dropdown-divider" />
-                                        <a href="#!" data-url="{{route('company.info', Auth::user()->id)}}" class="dropdown-item" data-ajax-popup="true" data-size="lg" data-title="{{__('Workspace Info')}}">
-                                            <i class="ti ti-circle-x"></i>
-                                            <span>{{ __('View') }}</span> <br>
-                                        </a>
+                                                                    <a href="{{ $route }}" class="dropdown-item">
+                                                                        <span>{{ $workspace->name }}</span>
+                                                                        @if ($workspace->created_by == Auth::user()->id)
+                                                                            <span class="badge bg-dark"> {{ Auth::user()->roles->first()->name }}</span>
+                                                                        @else
+                                                                            <span class="badge bg-dark"> {{ __('Shared') }}</span>
+                                                                        @endif
+                                                                    </a>
+                                                                    @if ($workspace->is_disable == 0)
+                                                                        <div class="action-btn mt-2">
+                                                                            <i class="ti ti-lock"></i>
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                            @endif
+                        @endforeach
+                        @if (getWorkspace()->count() > 1)
+                            @permission('workspace delete')
+                            <hr class="dropdown-divider" />
+                            <a href="#!" data-url="{{route('company.info', Auth::user()->id)}}" class="dropdown-item"
+                                data-ajax-popup="true" data-size="lg" data-title="{{__('Workspace Info')}}">
+                                <i class="ti ti-circle-x"></i>
+                                <span>{{ __('View') }}</span> <br>
+                            </a>
 
 
-                                    <hr class="dropdown-divider" />
+                            <hr class="dropdown-divider" />
 
-                                    <form id="remove-workspace-form"
-                                        action="{{ route('workspace.destroy', getActiveWorkSpace()) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#!" class="dropdown-item remove_workspace">
-                                            <i class="ti ti-circle-x"></i>
-                                            <span>{{ __('Remove') }}</span> <br>
-                                            <small class="text-danger">{{ __('Active Workspace Will Consider') }}</small>
-                                        </a>
-                                    </form>
-                                @endpermission
-                            @endif
-                        </div>
-                    </li>
+                            <form id="remove-workspace-form" action="{{ route('workspace.destroy', getActiveWorkSpace()) }}"
+                                method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <a href="#!" class="dropdown-item remove_workspace">
+                                    <i class="ti ti-circle-x"></i>
+                                    <span>{{ __('Remove') }}</span> <br>
+                                    <small class="text-danger">{{ __('Active Workspace Will Consider') }}</small>
+                                </a>
+                            </form>
+                            @endpermission
+                        @endif
+                    </div>
+                </li>
                 @endpermission
 
                 <li class="dropdown dash-h-item drp-language">
@@ -269,17 +272,17 @@
                         @endforeach
                         @if (Auth::user()->type == 'super admin')
                             @permission('language create')
-                                <a href="#" data-url="{{ route('create.language') }}"
-                                    class="dropdown-item border-top pt-3 text-primary" data-ajax-popup="true"
-                                    data-title="{{ __('Create New Language') }}">
-                                    <span>{{ __('Create Language') }}</span>
-                                </a>
+                            <a href="#" data-url="{{ route('create.language') }}"
+                                class="dropdown-item border-top pt-3 text-primary" data-ajax-popup="true"
+                                data-title="{{ __('Create New Language') }}">
+                                <span>{{ __('Create Language') }}</span>
+                            </a>
                             @endpermission
                             @permission('language manage')
-                                <a href="{{ route('lang.index', [Auth::user()->lang]) }}"
-                                    class="dropdown-item  pt-3 text-primary">
-                                    <span>{{ __('Manage Languages') }}</span>
-                                </a>
+                            <a href="{{ route('lang.index', [Auth::user()->lang]) }}"
+                                class="dropdown-item  pt-3 text-primary">
+                                <span>{{ __('Manage Languages') }}</span>
+                            </a>
                             @endpermission
                         @endif
                     </div>
