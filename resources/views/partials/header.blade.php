@@ -59,7 +59,87 @@
                         </a>
                     </li>
                 @endImpersonating
+
                 @permission('user chat manage')
+                @php
+                    $unseenCounter = App\Models\ChMessage::where('to_id', Auth::user()->id)
+                        ->where('seen', 0)
+                        ->count();
+                @endphp
+                <li class="dash-h-item">
+                    <a class="dash-head-link me-0" href="{{ url('/chatify') }}">
+                        <i class="ti ti-message-circle"></i>
+                        <span class="bg-danger dash-h-badge message-counter custom_messanger_counter"
+                            id="custom_messanger_counter">{{ $unseenCounter }}
+                            <span class="sr-only"></span>
+                        </span>
+                    </a>
+                </li>
+                @endpermission
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        let chatifyWindow = null; // Track the Chatify window/tab globally
+
+                        // Request notification permission if not already granted
+                        if (Notification.permission === 'default') {
+                            console.log('Requesting notification permission on load...');
+                            Notification.requestPermission().then(permission => {
+                                console.log('Permission status:', permission);
+                            });
+                        }
+
+                        // Function to show a notification
+                        function showNotification(title, body, url) {
+                            if (Notification.permission === 'granted') {
+                                // Play a notification sound
+                                const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2575/2575-preview.mp3'); // Replace with your sound file path
+                                audio.play();
+
+                                // Create the notification
+                                const notification = new Notification(title, {
+                                    body: body,
+                                    icon: 'http://localhost/portal/uploads/logo/logo_dark_1735684065.png?1736720441', // Optional: Replace with your notification icon
+                                });
+
+                                // Redirect to the Chatify window or open a new one when clicked
+                                notification.onclick = () => {
+                                    if (chatifyWindow && !chatifyWindow.closed) {
+                                        // Focus the existing Chatify window/tab
+                                        chatifyWindow.focus();
+                                    } else {
+                                        // Open a new window/tab if no Chatify tab is found
+                                        chatifyWindow = window.open(url, '_blank');
+                                    }
+                                };
+                            } else {
+                                console.log('Notifications are not enabled.');
+                            }
+                        }
+
+                        // Example: Trigger a notification when the counter changes
+                        const observer = new MutationObserver(() => {
+                            const counter = document.querySelector('.custom_messanger_counter').textContent.trim();
+                            if (parseInt(counter, 10) > 0) {
+                                console.log(`New messages count: ${counter}`);
+                                showNotification(
+                                    'New Message',
+                                    `You have ${counter} new message(s)!`,
+                                    'http://localhost/portal/chatify' // Replace with your desired URL
+                                );
+                            }
+                        });
+
+                        // Observe the counter for changes
+                        const counterElement = document.querySelector('.custom_messanger_counter');
+                        if (counterElement) {
+                            observer.observe(counterElement, { childList: true });
+                        } else {
+                            console.log('Counter element not found.');
+                        }
+                    });
+                </script>
+                <!-- @permission('user chat manage')
                     @php
                         $unseenCounter = App\Models\ChMessage::where('to_id', Auth::user()->id)
                             ->where('seen', 0)
@@ -73,7 +153,8 @@
                                     class="sr-only"></span>
                         </a>
                     </li>
-                @endpermission
+                @endpermission -->
+
                 @permission('workspace create')
                     @if (PlanCheck('Workspace', Auth::user()->id) == true)
                         <li class="dash-h-item">

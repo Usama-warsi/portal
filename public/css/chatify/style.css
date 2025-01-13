@@ -3,6 +3,10 @@ body {
     font-size: 0.9rem !important;
 }
 
+table.messenger-list-item.m-list-active {
+    background: var(--color-customColor);
+}
+
 .navbar-nav .nav-link i, .navbar-nav .nav-link svg, .navbar-nav .nav-link img {
     margin-right: 0px !important;
 }
