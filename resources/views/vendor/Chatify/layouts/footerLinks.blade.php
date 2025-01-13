@@ -3,9 +3,11 @@
   // Enable pusher logging - don't include this in production
   Pusher.logToConsole = false;
 
-  var pusher = new Pusher("{{ config('chatify.pusher.key') }}", {
+  $admin_settings = getAdminAllSetting();
+
+  var pusher = new Pusher($admin_settings['PUSHER_APP_KEY'], {
     encrypted: true,
-    cluster: "{{ config('chatify.pusher.options.cluster') }}",
+    cluster: $admin_settings['PUSHER_APP_CLUSTER'],
     authEndpoint: '{{route("pusher.auth")}}',
     auth: {
         headers: {

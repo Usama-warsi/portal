@@ -502,14 +502,13 @@ channel.bind('messaging', function (data) {
 });
 
 // listen to typing indicator
-channel.bind('client-typing', function (data) {
-    if (data.from_id == messenger.split('_')[1] && data.to_id == auth_id) {
-        data.typing == true ? messagesContainer.find('.typing-indicator').show()
-            : messagesContainer.find('.typing-indicator').hide();
-    }
-    // scroll to bottom
-    scrollBottom(messagesContainer);
-});
+// channel.bind('client-typing', function (data) {
+//     if (data.from_id == messenger.split('_')[1] && data.to_id == auth_id) {
+//         data.typing == true ? messagesContainer.find('.typing-indicator').show()
+//             : messagesContainer.find('.typing-indicator').hide();
+//     }
+//     scrollBottom(messagesContainer);
+// });
 
 // listen to seen event
 channel.bind('client-seen', function (data) {
@@ -554,13 +553,13 @@ activeStatusChannel.bind('pusher:member_removed', function (member) {
  * Trigger typing event
  *-------------------------------------------------------------
  */
-function isTyping(status) {
-    return channel.trigger('client-typing', {
-        from_id: auth_id, // Me
-        to_id: messenger.split('_')[1], // Messenger
-        typing: status,
-    });
-}
+// function isTyping(status) {
+//     return channel.trigger('client-typing', {
+//         from_id: auth_id, // Me
+//         to_id: messenger.split('_')[1], // Messenger
+//         typing: status,
+//     });
+// }
 
 /**
  *-------------------------------------------------------------
