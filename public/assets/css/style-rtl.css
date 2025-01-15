@@ -59,6 +59,7 @@ File: style.css
     --bs-body-color-rgb: 41, 50, 64;
     --bs-body-bg-rgb: 248, 249, 253;
     --bs-font-sans-serif: "Open Sans", sans-serif;
+    --bs-font-montserrat: "Montserrat", sans-serif;
     --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
     --bs-body-font-family: var(--bs-font-sans-serif);
@@ -4756,7 +4757,7 @@ textarea.is-invalid.dataTable-input {
     --bs-card-title-spacer-y: 0.5rem;
     --bs-card-border-width: 0px;
     --bs-card-border-color: rgba(0, 0, 0, 0.125);
-    --bs-card-border-radius: 10px;
+    --bs-card-border-radius: 5px;
     --bs-card-box-shadow: ;
   --bs-card-inner-border-radius: calc(10px - 0px);
     --bs-card-cap-padding-y: 25px;
@@ -24516,8 +24517,8 @@ select.form-control[data-multiselectsplitter-firstselect-selector], select.custo
 }
 
 .event-cards .card {
-    padding: 12px;
-    border-radius: 20px;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .product-slider .carousel-indicators {

@@ -36,14 +36,16 @@ class DashboardController extends Controller
                 $created_by = creatorId();
                 $userType = Auth::user()->type;
                 $var = RotaUtility::manage();
-                $employee = "Modules\\$var\\Entities\\Employee"::where('created_by', '=', creatorId())->where('workspace', getActiveWorkSpace())->get()->toArray();
+                // $employee = "Modules\\".$var."\\Entities\\Employee"::where('created_by', '=', creatorId())->where('workspace', getActiveWorkSpace())->get()->toArray();
+                $employee = 'Modules\\' . $var . '\\Entities\\Employee'::where('created_by', '=', creatorId())->where('workspace', getActiveWorkSpace())->get()->toArray();
 
                 // $employee = Employee::where('created_by', '=', creatorId())->where('workspace', getActiveWorkSpace())->get()->toArray();
 
 
                 if (!in_array(Auth::user()->type, Auth::user()->not_emp_type)) {
 
-                    $employee = "Modules\\$var\\Entities\\Employee"::where('user_id', $userId)->get()->toArray();
+                    // $employee = "Modules\\".$var."\\Entities\\Employee"::where('user_id', $userId)->get()->toArray();
+                    $employee = "Modules\\".$var."\\Entities\\Employee"::where('user_id', $userId)->get()->toArray();
                 }
                 $employee_id = '0';
                 $employee_data = [];
@@ -58,7 +60,8 @@ class DashboardController extends Controller
                 $designations = Designation::where('created_by', $created_by)->get()->toArray();
                 // show price
                 if (Auth::user()->type != 'company') {
-                    $company_setting_data = "Modules\\{$var}\\Entities\\Employee"::Where('id', $created_by)->first();
+                    // $company_setting_data = "Modules\\".$var."\\Entities\\Employee"::Where('id', $created_by)->first();
+                    $company_setting_data = "Modules\\".$var."\\Entities\\Employee"::Where('id', $created_by)->first();
                     if (!(empty($company_setting_data))) {
 
                         $emp_show_rotas_price = (!empty($company_settings['emp_show_rotas_price'])) ? $company_settings['emp_show_rotas_price'] : 0;
@@ -86,10 +89,10 @@ class DashboardController extends Controller
                     $rotas = Rota::where('user_id', $employee_id)->whereRaw('rotas_date = "' . $date . '" ')->whereRaw($published_shifts)->whereRaw('shift_status != "disable"')->get()->toArray();
                     if (!empty($rotas)) {
                         foreach ($rotas as $rota) {
-                            $profile_data = "Modules\\$var\\Entities\\Employee"::whereRaw('employee_id = ' . $rota['user_id'] . ' ')->first();
+                            $profile_data = "Modules\\".$var."\\Entities\\Employee"::whereRaw('employee_id = ' . $rota['user_id'] . ' ')->first();
                             $color        = '#8492a6';
                             $nameee       = '-';
-                            $location = "Modules\\$var\\Entities\\Designation"::where('id', $rota['designation_id'])->first();
+                            $location = "Modules\\".$var."\\Entities\\Designation"::where('id', $rota['designation_id'])->first();
                             $count_role_id[$date][$rota['designation_id']][] = array(
                                 'id' => $rota['id'],
 
@@ -241,7 +244,7 @@ class DashboardController extends Controller
 
         // show price
         if (Auth::user()->type != 'company') {
-            $company_setting_data = "Modules\\$var\\Entities\\Employee"::Where('id', $created_by)->first();
+            $company_setting_data = "Modules\\".$var."\\Entities\\Employee"::Where('id', $created_by)->first();
             if (!(empty($company_setting_data))) {
 
                 $emp_show_rotas_price = (!empty(company_setting('emp_show_rotas_price'))) ? company_setting('emp_show_rotas_price') : 0;
@@ -255,10 +258,10 @@ class DashboardController extends Controller
             $published_shifts = ' 0 = 0';
         }
 
-        $employee = "Modules\\$var\\Entities\\Employee"::where('created_by', $created_by)->orwhere('id', $created_by)->get()->toArray();
+        $employee = "Modules\\".$var."\\Entities\\Employee"::where('created_by', $created_by)->orwhere('id', $created_by)->get()->toArray();
 
         if (!in_array(Auth::user()->type, Auth::user()->not_emp_type)) {
-            $employee = "Modules\\{$var}\\Entities\\Employee"::where('user_id', $userId)->get()->toArray();
+            $employee = "Modules\\".$var."\\Entities\\Employee"::where('user_id', $userId)->get()->toArray();
         }
         $employee_id = '';
         $employee_data = [];
@@ -291,12 +294,12 @@ class DashboardController extends Controller
             if (!empty($rotas)) {
                 $role_id = [];
                 foreach ($rotas as $rota) {
-                    $profile_data = "Modules\\$var\\Entities\\Employee"::whereRaw('employee_id = ' . $rota['user_id'] . ' ')->first();
+                    $profile_data = "Modules\\".$var."\\Entities\\Employee"::whereRaw('employee_id = ' . $rota['user_id'] . ' ')->first();
                     $color = '#8492a6';
                     $nameee = '-';
                     $roll_ids = '-';
 
-                    $location = "Modules\\$var\\Entities\\Designation"::whereRaw('id = ' . $rota['designation_id'] . ' ')->first();
+                    $location = "Modules\\".$var."\\Entities\\Designation"::whereRaw('id = ' . $rota['designation_id'] . ' ')->first();
 
                     $count_role_id[$date][$rota['designation_id']][] = array(
                         'id'                => $rota['id'],
@@ -410,10 +413,10 @@ class DashboardController extends Controller
         $user       = Auth::user();
         $created_by = creatorId();
 
-        $employee = "Modules\\{$var}\\Entities\\Employee"::where('created_by', $created_by)->get()->toArray();
+        $employee = "Modules\\".$var."\\Entities\\Employee"::where('created_by', $created_by)->get()->toArray();
 
         if (!in_array(Auth::user()->type, Auth::user()->not_emp_type)) {
-            $employee = "Modules\\{$var}\\Entities\\Employee"::where('user_id', $userId)->get()->toArray();
+            $employee = "Modules\\".$var."\\Entities\\Employee"::where('user_id', $userId)->get()->toArray();
         }
 
 
@@ -434,7 +437,7 @@ class DashboardController extends Controller
 
         // show price
         if (Auth::user()->type != 'company') {
-            $company_setting_data = "Modules\\{$var}\\Entities\\Employee"::Where('id', $created_by)->first();
+            $company_setting_data = "Modules\\".$var."\\Entities\\Employee"::Where('id', $created_by)->first();
             if (!(empty($company_setting_data))) {
                 $emp_show_rotas_price = (!empty(company_setting('emp_show_rotas_price'))) ? company_setting('emp_show_rotas_price') : 0;
             }
@@ -450,13 +453,13 @@ class DashboardController extends Controller
         $loaction_option = [];
         $locations       = [];
         if (Auth::user()->type == 'company') {
-            $locations = "Modules\\$var\\Entities\\Designation"::where('created_by', creatorId())->where('workspace', getActiveWorkSpace())->get();
+            $locations = "Modules\\".$var."\\Entities\\Designation"::where('created_by', creatorId())->where('workspace', getActiveWorkSpace())->get();
         }
 
         if (!in_array(Auth::user()->type, Auth::user()->not_emp_type)) {
-            $locations_id = "Modules\\{$var}\\Entities\\Employee"::where('user_id', $userId)->first();
+            $locations_id = "Modules\\".$var."\\Entities\\Employee"::where('user_id', $userId)->first();
             if (!empty($locations_id->branch_id)) {
-                $locations = "Modules\\$var\\Entities\\Designation"::where('id', $locations_id->designation_id . ')')->get();
+                $locations = "Modules\\".$var."\\Entities\\Designation"::where('id', $locations_id->designation_id . ')')->get();
             }
         }
 
@@ -495,10 +498,10 @@ class DashboardController extends Controller
             $employee = $emp_name;
         } else {
             if (Auth::user()->type == 'company') {
-                $employee = "Modules\\$var\\Entities\\Employee"::where('created_by', $created_by)->orwhere('id', $created_by)->pluck('id')->toArray();
+                $employee = "Modules\\".$var."\\Entities\\Employee"::where('created_by', $created_by)->orwhere('id', $created_by)->pluck('id')->toArray();
             } else {
 
-                $employee = "Modules\\$var\\Entities\\Employee"::where('user_id', $userId)->pluck('id')->toArray();
+                $employee = "Modules\\".$var."\\Entities\\Employee"::where('user_id', $userId)->pluck('id')->toArray();
             }
         }
 
@@ -543,10 +546,10 @@ class DashboardController extends Controller
         $user       = Auth::user();
         $created_by = creatorId();
 
-        $employee = "Modules\\$var\\Entities\\Employee"::where('created_by', $created_by)->get()->toArray();
+        $employee = "Modules\\".$var."\\Entities\\Employee"::where('created_by', $created_by)->get()->toArray();
 
         if (!in_array(Auth::user()->type, Auth::user()->not_emp_type)) {
-            $employee = "Modules\\{$var}\\Entities\\Employee"::where('user_id', $userId)->get()->toArray();
+            $employee = "Modules\\".$var."\\Entities\\Employee"::where('user_id', $userId)->get()->toArray();
         }
 
 
@@ -558,9 +561,9 @@ class DashboardController extends Controller
             }
         }
         if (Auth::user()->type == 'company') {
-            $employee_id = "Modules\\$var\\Entities\\Employee"::where('created_by', $created_by)->orwhere('id', $created_by)->pluck('id')->toArray();
+            $employee_id = "Modules\\".$var."\\Entities\\Employee"::where('created_by', $created_by)->orwhere('id', $created_by)->pluck('id')->toArray();
         } else {
-            $employee_id = "Modules\\$var\\Entities\\Employee"::where('user_id', $userId)->pluck('id')->toArray();
+            $employee_id = "Modules\\".$var."\\Entities\\Employee"::where('user_id', $userId)->pluck('id')->toArray();
         }
 
         $break_paid                 = (!empty(company_setting('break_paid'))) ? company_setting('break_paid') : 'paid';
@@ -568,7 +571,7 @@ class DashboardController extends Controller
 
         // show price
         if (Auth::user()->type != 'company') {
-            $company_setting_data = "Modules\\$var\\Entities\\Employee"::Where('id', $created_by)->first();
+            $company_setting_data = "Modules\\".$var."\\Entities\\Employee"::Where('id', $created_by)->first();
             if (!(empty($company_setting_data))) {
                 $emp_show_rotas_price = (!empty(company_setting('emp_show_rotas_price'))) ? company_setting('emp_show_rotas_price') : 0;
             }
@@ -584,12 +587,12 @@ class DashboardController extends Controller
         $loaction_option = [];
         $locations       = [];
         if (Auth::user()->type == 'company') {
-            $locations = "Modules\\$var\\Entities\\Designation"::where('created_by', creatorId())->where('workspace', getActiveWorkSpace())->get();
+            $locations = "Modules\\".$var."\\Entities\\Designation"::where('created_by', creatorId())->where('workspace', getActiveWorkSpace())->get();
         }
         if (!in_array(Auth::user()->type, Auth::user()->not_emp_type)) {
-            $locations_id = "Modules\\$var\\Entities\\Employee"::where('user_id', $userId)->first();
+            $locations_id = "Modules\\".$var."\\Entities\\Employee"::where('user_id', $userId)->first();
             if (!empty($locations_id->branch_id)) {
-                $locations = "Modules\\$var\\Entities\\Designation"::where('id', $locations_id->designation_id . ')')->get();
+                $locations = "Modules\\".$var."\\Entities\\Designation"::where('id', $locations_id->designation_id . ')')->get();
             }
         }
 
@@ -635,9 +638,9 @@ class DashboardController extends Controller
             $employee = $emp_name;
         } else {
             if (Auth::user()->type == 'company') {
-                $employee = "Modules\\{$var}\\Entities\\Employee"::where('created_by', $created_by)->orwhere('id', $created_by)->pluck('id')->toArray();
+                $employee = "Modules\\".$var."\\Entities\\Employee"::where('created_by', $created_by)->orwhere('id', $created_by)->pluck('id')->toArray();
             } else {
-                $employee = "Modules\\{$var}\\Entities\\Employee"::where('user_id', $userId)->pluck('id')->toArray();
+                $employee = "Modules\\".$var."\\Entities\\Employee"::where('user_id', $userId)->pluck('id')->toArray();
             }
         }
 

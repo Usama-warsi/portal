@@ -3,12 +3,17 @@
 @endphp
 <head>
 
-    <title>@yield('page-title') | {{ !empty($company_settings['title_text']) ? $company_settings['title_text'] : (!empty($admin_settings['title_text']) ? $admin_settings['title_text'] :'Portal Dev Connect Hub') }}
-    </title>
+    <title>@yield('page-title') | {{ !empty($company_settings['title_text']) ? $company_settings['title_text'] : (!empty($admin_settings['title_text']) ? $admin_settings['title_text'] :'Portal Dev Connect Hub') }}</title>
 
     <meta name="title" content="{{ !empty($admin_settings['meta_title']) ? $admin_settings['meta_title'] : 'Portal Dev Connect Hub ' }}">
     <meta name="keywords" content="{{ !empty($admin_settings['meta_keywords']) ? $admin_settings['meta_keywords'] : 'Portal Dev Connect Hub ,SaaS solution,Multi-workspace' }}">
     <meta name="description" content="{{ !empty($admin_settings['meta_description']) ? $admin_settings['meta_description'] : ''}}">
+
+    <!-- PWA Starts -->
+    <meta name="theme-color" content="var(--color-customColor)"/>
+    <link rel="apple-touch-icon" href="{{ asset('logo.PNG') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+    <!-- PWA Ends -->
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">

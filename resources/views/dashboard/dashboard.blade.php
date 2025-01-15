@@ -85,7 +85,7 @@
 
                         <div class="number-icon ms-3 mb-3 mt-3"><h3>{{$user->total_user}}</h3></div>
                             <div class="ms-3 mb-3 mt-3">
-                                <h6>{{__('Paid Customers')}} : {{$user['total_paid_user']}}</h6>
+                                <h6>{{__('Paid Customers')}}: {{$user['total_paid_user']}}</h6>
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
 
                         <div class="number-icon ms-3 mb-3 mt-3"><h3>{{$user->total_orders}}</h3></div>
                             <div class="ms-3 mb-3 mt-3">
-                                <h6>{{__('Order Amount')}} : <span class="text-dark">{{ super_currency_format_with_sym($user['total_orders_price']) }}</span></h6>
+                                <h6>{{__('Order Amount')}}: <span class="text-dark">{{ super_currency_format_with_sym($user['total_orders_price']) }}</span></h6>
                         </div>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                         </div>
                         <div class="number-icon ms-3 mb-3 mt-3"><h3>{{$user->total_plans}}</h3></div>
                             <div class="ms-3 mb-3 mt-3">
-                                <h6>{{__('Popular Plan')}} : <span class="text-primary">{{ !empty($user->popular_plan) ? $user->popular_plan->name : '' }}</span></h6>
+                                <h6>{{__('Popular Plan')}}: <span class="text-primary">{{ !empty($user->popular_plan) ? $user->popular_plan->name : '' }}</span></h6>
                         </div>
                     </div>
                 </div>

@@ -10,7 +10,7 @@
     $(window).on('load', function () {
         var element = document.getElementById('boxes');
         var opt = {
-            filename: '{{ $job_candidate->name . __(' Resume'), $job_candidate->created_by,$job_candidate->workspace}}',
+            filename: '{{ $job_candidate->name . __(' Resume') . $job_candidate->created_by . $job_candidate->workspace}}',
             image: {type: 'jpeg', quality: 1},
             html2canvas: {scale: 4, dpi: 72, letterRendering: true},
             jsPDF: {unit: 'in', format: 'A4'}
