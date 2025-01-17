@@ -1,20 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" dir="{{ $settings['site_rtl'] == 'on'?'rtl':''}}">
+<html lang="en" dir="{{ $settings['site_rtl'] == 'on' ? 'rtl' : ''}}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ \Modules\Pos\Entities\Pos::posNumberFormat($pos->pos_id)}} | {{ !empty(company_setting('title_text')) ? company_setting('title_text') : (!empty(admin_setting('title_text')) ? admin_setting('title_text') :'WorkDo') }}</title>
+    <title>{{ \Modules\Pos\Entities\Pos::posNumberFormat($pos->pos_id)}} |
+        {{ !empty(company_setting('title_text')) ? company_setting('title_text') : (!empty(admin_setting('title_text')) ? admin_setting('title_text') : 'WorkDo') }}
+    </title>
     <link
         href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
         rel="stylesheet">
 
 
     <style type="text/css">
-        html[dir="rtl"]  {
-                letter-spacing: 0.1px;
-            }
+        html[dir="rtl"] {
+            letter-spacing: 0.1px;
+        }
+
         :root {
-            --theme-color: {{$color}};
+            --theme-color:
+                {{$color}}
+            ;
             --white: #ffffff;
             --black: #000000;
         }
@@ -165,7 +171,8 @@
         p:not(:last-of-type) {
             margin-bottom: 15px;
         }
-        .invoice-summary p{
+
+        .invoice-summary p {
             margin-bottom: 0;
         }
     </style>
@@ -178,13 +185,13 @@
                 <tbody>
                     <tr>
                         <td>
-                            <h3 style="text-transform: uppercase; font-size: 20px; font-weight: bold; color: {{$color}};">{{ __('POS')}}</h3>
+                            <h3
+                                style="text-transform: uppercase; font-size: 20px; font-weight: bold; color: {{$color}};">
+                                {{ __('POS')}}</h3>
 
                         </td>
                         <td class="text-right">
-                            <img class="invoice-logo"
-                                src="{{$img}}"
-                                alt="">
+                            <img class="invoice-logo" src="{{$img}}" alt="">
                         </td>
                     </tr>
                 </tbody>
@@ -206,8 +213,10 @@
                                     @if(!empty($settings['company_zipcode'])) - {{$settings['company_zipcode']}}@endif
                                 </p>
                                 <p>
-                                    @if(!empty($settings['registration_number'])){{__('Registration Number')}} : {{$settings['registration_number']}} @endif<br>
-                                    @if(!empty($settings['tax_type']) && !empty($settings['vat_number'])){{$settings['tax_type'].' '. __('Number')}} : {{$settings['vat_number']}} <br>@endif
+                                    @if(!empty($settings['registration_number'])){{__('Registration Number')}} :
+                                    {{$settings['registration_number']}} @endif<br>
+                                    @if(!empty($settings['tax_type']) && !empty($settings['vat_number'])){{$settings['tax_type'] . ' ' . __('Number')}}
+                                    : {{$settings['vat_number']}} <br>@endif
                                 </p>
                             </td>
                         @endif
@@ -216,7 +225,8 @@
                                 <tbody>
                                     <tr>
                                         <td>{{ __('Number: ')}}</td>
-                                        <td class="text-right">{{\Modules\Pos\Entities\Pos::posNumberFormat($pos->pos_id)}}</td>
+                                        <td class="text-right">
+                                            {{\Modules\Pos\Entities\Pos::posNumberFormat($pos->pos_id)}}</td>
                                     </tr>
                                     <tr>
                                         <td>{{ __('POS Date:')}}</td>
@@ -239,19 +249,19 @@
                                 {{!empty($customer->billing_name)?$customer->billing_name:''}}<br>
                                 {{!empty($customer->billing_phone)?$customer->billing_phone:''}}<br>
                                 {{!empty($customer->billing_address)?$customer->billing_address:''}}<br>
-                                {{!empty($customer->billing_city)?$customer->billing_city:'' .', '}},{{!empty($customer->billing_state)?$customer->billing_state:'',', '}},{{!empty($customer->billing_country)?$customer->billing_country:''}}<br>
+                                {{!empty($customer->billing_city)?$customer->billing_city:'' .', '}},{{!empty($customer->billing_state)?$customer->billing_state:''.', '}},{{!empty($customer->billing_country)?$customer->billing_country:''}}<br>
                                 {{!empty($customer->billing_zip)?$customer->billing_zip:''}}<br>
                             </p>
                         </td>
-                        @if($settings['pos_shipping_display']=='on')
+                        @if($settings['pos_shipping_display'] == 'on')
                             <td class="text-right">
                                 <strong style="margin-bottom: 10px; display:block;">{{__('Ship To')}}:</strong>
                                 <p>
-                                {{!empty($customer->shipping_name)?$customer->shipping_name:''}}<br>
-                                {{!empty($customer->shipping_phone)?$customer->shipping_phone:''}}<br>
-                                {{!empty($customer->shipping_address)?$customer->shipping_address:''}}<br>
-                                {{!empty($customer->shipping_city)?$customer->shipping_city:'' . ', '}},{{!empty($customer->shipping_state)?$customer->shipping_state:'' .', '}},{{!empty($customer->shipping_country)?$customer->shipping_country:''}}<br>
-                                {{!empty($customer->shipping_zip)?$customer->shipping_zip:''}}<br>
+                                    {{!empty($customer->shipping_name) ? $customer->shipping_name : ''}}<br>
+                                    {{!empty($customer->shipping_phone) ? $customer->shipping_phone : ''}}<br>
+                                    {{!empty($customer->shipping_address) ? $customer->shipping_address : ''}}<br>
+                                    {{!empty($customer->shipping_city) ? $customer->shipping_city : '' . ', '}},{{!empty($customer->shipping_state) ? $customer->shipping_state : '' . ', '}},{{!empty($customer->shipping_country) ? $customer->shipping_country : ''}}<br>
+                                    {{!empty($customer->shipping_zip) ? $customer->shipping_zip : ''}}<br>
                                 </p>
                             </td>
                         @endif
@@ -271,33 +281,33 @@
                 </thead>
                 <tbody>
                     @if(isset($pos->itemData) && count($pos->itemData) > 0)
-                    @foreach($pos->itemData as $key => $item)
-                    <tr>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->quantity}}</td>
-                        <td>{{currency_format_with_sym($item->price)}}</td>
-                        <td>
-                            @php
-                                $totalTaxRate = 0;
-                                $totalTaxPrice=0;
-                            @endphp
-                            @if(!empty($item->itemTax))
-                                @foreach($item->itemTax as $taxes)
-                                    @php
-                                        $res = str_ireplace( array( '%' ), ' ', $taxes['rate']);
-                                        $taxPrice=\Modules\Pos\Entities\Pos::taxRate($res,$item->price,$item->quantity);
-                                        $totalTaxPrice+=$taxPrice;
-                                    @endphp
-                                        <span>{{$taxes['name']}}</span> <span>({{$taxes['rate']}})</span><br>
-                                @endforeach
-                            @else
-                                -
-                            @endif
-                        </td>
-                        <td>{{currency_format_with_sym($totalTaxPrice)}}</td>
-                        <td >{{currency_format_with_sym(($item->price*$item->quantity)+$totalTaxPrice)}}</td>
-                    </tr>
-                @endforeach
+                                    @foreach($pos->itemData as $key => $item)
+                                                    <tr>
+                                                        <td>{{$item->name}}</td>
+                                                        <td>{{$item->quantity}}</td>
+                                                        <td>{{currency_format_with_sym($item->price)}}</td>
+                                                        <td>
+                                                            @php
+                                                                $totalTaxRate = 0;
+                                                                $totalTaxPrice = 0;
+                                                            @endphp
+                                                            @if(!empty($item->itemTax))
+                                                                            @foreach($item->itemTax as $taxes)
+                                                                                            @php
+                                                                                                $res = str_ireplace(array('%'), ' ', $taxes['rate']);
+                                                                                                $taxPrice = \Modules\Pos\Entities\Pos::taxRate($res, $item->price, $item->quantity);
+                                                                                                $totalTaxPrice += $taxPrice;
+                                                                                            @endphp
+                                                                                            <span>{{$taxes['name']}}</span> <span>({{$taxes['rate']}})</span><br>
+                                                                            @endforeach
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                        <td>{{currency_format_with_sym($totalTaxPrice)}}</td>
+                                                        <td>{{currency_format_with_sym(($item->price * $item->quantity) + $totalTaxPrice)}}</td>
+                                                    </tr>
+                                    @endforeach
                     @else
                         <tr>
                             <td>-</td>
@@ -310,8 +320,8 @@
                             <td>-</td>
                             <td>-</td>
                         <tr class="border-0 itm-description ">
-                                <td colspan="6">-</td>
-                            </tr>
+                            <td colspan="6">-</td>
+                        </tr>
                         </tr>
                     @endif
                 </tbody>
@@ -345,7 +355,7 @@
                                     @if(!empty($posPayment->discount))
                                         <td>{{currency_format_with_sym($posPayment->amount - $posPayment->discount)}}</td>
                                     @else
-                                       <td>{{currency_format_with_sym($posPayment->amount)}}</td>
+                                        <td>{{currency_format_with_sym($posPayment->amount)}}</td>
                                     @endif
                                 </tr>
                             </table>

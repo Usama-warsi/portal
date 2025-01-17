@@ -213,7 +213,12 @@
                                     </tr>
                                     <tr>
                                         <td>{{ __('Issue Date:')}}</td>
-                                        <td class="text-right">{{$quote->issue_date,$quote->created_by,$quote->workspace}}</td>
+                                        <!-- <td class="text-right">{{$quote->issue_date,$quote->created_by,$quote->workspace}}</td> -->
+                                        <td class="text-right">
+                                            {{ $quote->issue_date }},
+                                            {{ $quote->created_by }},
+                                            {{ $quote->workspace }}
+                                        </td>
                                     </tr>
                                     @if(!empty($customFields) && count($quote->customField)>0)
                                         @foreach($customFields as $field)

@@ -1,5 +1,3 @@
-
-
 <footer class="mt-5 dash-footer">
     <div class="footer-wrapper">
         <div class="py-1">
@@ -18,49 +16,56 @@
 </footer>
 
 @if (Route::currentRouteName() !== 'chatify')
-<div id="commonModal" class="modal" tabindex="-1" aria-labelledby="exampleModalLongTitle"
-    aria-modal="true" role="dialog" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-            </div>
-            <div class="body">
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="commonModalOver" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-            </div>
-            <div class="body">
+    <div id="commonModal" class="modal" tabindex="-1" aria-labelledby="exampleModalLongTitle" aria-modal="true"
+        role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="body">
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <div class="modal fade" id="commonModalOver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="body">
+                </div>
+            </div>
+        </div>
+    </div>
 @endif
 <div class="loader-wrapper d-none">
-<span class="site-loader"> </span>
+    <span class="site-loader"> </span>
 </div>
 <div class="top-0 p-3 position-fixed end-0" style="z-index: 99999">
-<div id="liveToast" class="text-white toast fade" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="d-flex">
-        <div class="toast-body"> </div>
-        <button type="button" class="m-auto btn-close btn-close-white me-2" data-bs-dismiss="toast"
-            aria-label="Close"></button>
+    <div id="liveToast" class="text-white toast fade" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body"> </div>
+            <button type="button" class="m-auto btn-close btn-close-white me-2" data-bs-dismiss="toast"
+                aria-label="Close"></button>
+        </div>
     </div>
-</div>
 </div>
 <!-- Required Js -->
 
+
+<script src="{{ asset('/public/sw.js') }}"></script>
+<script>
+    if (!navigator.serviceWorker.controller) {
+        navigator.serviceWorker.register("/public/sw.js").then(function (reg) {
+            console.log("Service worker has been registered for scope: " + reg.scope);
+        });
+    }
+</script>
 
 <script src="{{ asset('assets/js/plugins/popper.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
@@ -83,19 +88,19 @@
 
 <script src="{{ asset('js/custom.js') }}"></script>
 @if ($message = Session::get('success'))
-<script>
-    toastrs('Success', '{!! $message !!}', 'success');
-</script>
+    <script>
+        toastrs('Success', '{!! $message !!}', 'success');
+    </script>
 @endif
 @if ($message = Session::get('error'))
-<script>
-    toastrs('Error', '{!! $message !!}', 'error');
-</script>
+    <script>
+        toastrs('Error', '{!! $message !!}', 'error');
+    </script>
 @endif
 @stack('scripts')
 @include('Chatify::layouts.footerLinks')
 @if (isset($admin_settings['enable_cookie']) && $admin_settings['enable_cookie'] == 'on')
-@include('layouts.cookie_consent')
+    @include('layouts.cookie_consent')
 @endif
 </body>
 

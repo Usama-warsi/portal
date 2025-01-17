@@ -75,6 +75,17 @@
       0 => 'Lab404\\Impersonate\\ImpersonateServiceProvider',
     ),
   ),
+  'ladumor/laravel-pwa' => 
+  array (
+    'aliases' => 
+    array (
+      'LaravelPwa' => 'Ladumor\\LaravelPwa\\LaravelPwa',
+    ),
+    'providers' => 
+    array (
+      0 => '\\Ladumor\\LaravelPwa\\PWAServiceProvider',
+    ),
+  ),
   'lahirulhr/laravel-payhere' => 
   array (
     'providers' => 
@@ -252,6 +263,13 @@
     'aliases' => 
     array (
       'Laratrust' => 'Laratrust\\LaratrustFacade',
+    ),
+  ),
+  'silviolleite/laravelpwa' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'LaravelPWA\\Providers\\LaravelPWAServiceProvider',
     ),
   ),
   'spatie/laravel-google-calendar' => 

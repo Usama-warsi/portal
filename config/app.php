@@ -178,7 +178,8 @@ return [
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
         Paytabscom\Laravel_paytabs\PaypageServiceProvider::class,
         PragmaRX\Google2FALaravel\ServiceProvider::class,
-        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        Ladumor\LaravelPwa\PWAServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -202,7 +203,8 @@ return [
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
 		'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'Google2FA' => PragmaRX\Google2FALaravel\Facade::class,
-        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class
+        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
+        'LaravelPwa' => \Ladumor\LaravelPwa\LaravelPwa::class,
     ])->toArray(),
 
 ];

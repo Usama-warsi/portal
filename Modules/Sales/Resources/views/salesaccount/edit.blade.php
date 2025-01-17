@@ -157,7 +157,8 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            {{ Form::label('billing_address', __('Billing Address')), ['class' => 'form-label'] }}
+                                            <!-- {{ Form::label('billing_address', __('Billing Address')), ['class' => 'form-label'] }} -->
+                                            {{ Form::label('billing_address', __('Billing Address'), ['class' => 'form-label']) }}
                                             <div class="action-btn bg-primary ms-2 float-end">
                                                 <a class="mx-3 btn btn-sm d-inline-flex align-items-center text-white"
                                                     id="billing_data" data-bs-toggle="tooltip" data-placement="top"
